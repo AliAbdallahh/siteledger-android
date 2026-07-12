@@ -1,4 +1,4 @@
-name: Build SiteLedger APK from Archive
+name: Build SiteLedger APK v1.1
 
 on:
   workflow_dispatch:
@@ -13,10 +13,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Extract SiteLedger source
+      - name: Extract SiteLedger v1.1 source
         run: |
+          rm -rf project
           mkdir -p project
-          unzip -q SiteLedger_Android_Source_v1.0.zip -d project
+          unzip -q SiteLedger_Android_Source_v1.1.zip -d project
           test -f project/package.json
 
       - name: Set up Node.js
@@ -55,6 +56,6 @@ jobs:
       - name: Upload installable APK
         uses: actions/upload-artifact@v4
         with:
-          name: SiteLedger-debug-apk
+          name: SiteLedger-v1.1-debug-apk
           path: project/android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
